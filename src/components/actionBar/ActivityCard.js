@@ -17,7 +17,7 @@ import { withStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import colors from "shared/colors";
 import { normalize } from "normalizr-gre";
-import openSocket from "socket.io-client";
+import io from "socket.io-client";
 import type { ActivityGeneric } from "data/types";
 
 const styles = {
@@ -79,7 +79,7 @@ class ActivityCard extends Component<
       process.env.NODE_ENV !== "development"
         ? "/notification"
         : "http://localhost:3033";
-    const socket = openSocket.connect(url);
+    const socket = io.connect(url);
     const myAuthToken = getLocalStorageToken();
     let self = this;
     socket.on("connect", function() {
